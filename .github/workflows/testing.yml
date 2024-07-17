@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Create Empty File for Console Output
-        run: echo. > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
+        run: type nul > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
 
       - name: Download Downloads.bat
         run: |
