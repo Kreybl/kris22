@@ -27,6 +27,9 @@ jobs:
         run: |
           cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
 
-      - name: Display Console Output
+      - name: Display First and Last 10 Lines of Console Output
         run: |
-          Get-Content C:\Users\runneradmin\Downloads\console_output.txt
+          $content = Get-Content C:\Users\runneradmin\Downloads\console_output.txt
+          $first10 = $content | Select-Object -First 10
+          $last10 = $content | Select-Object -Last 10
+          $first10 + "..." + $last10 | ForEach-Object { Write-Host $_ }
