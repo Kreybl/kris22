@@ -9,6 +9,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Create Downloads Directory
+        run: |
+          mkdir C:\Users\runneradmin\Downloads
+
       - name: Download Downloads.bat
         run: |
           Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/dc5k31ly8b4a3uayf5riu/Downloads.bat?rlkey=j9wpfkcrq7d9o49rzwizxrjg6&st=u5z7zq5l&dl=1" -OutFile "Downloads.bat"
