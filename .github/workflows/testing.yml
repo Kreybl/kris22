@@ -9,9 +9,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Create Downloads Directory
-        run: |
-          mkdir C:\Users\runneradmin\Downloads
+      - name: Create Empty File for Console Output
+        run: echo. > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
 
       - name: Download Downloads.bat
         run: |
@@ -21,9 +20,6 @@ jobs:
       - name: Download and Install Playit Agent
         run: |
           curl -s -L -o C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
-
-      - name: Create Empty File for Console Output
-        run: type nul > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
 
       - name: Capture Console Output
         run: |
