@@ -20,8 +20,9 @@ jobs:
         run: Start-Sleep -Seconds 10
 
       - name: Capture Console Output
+          shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
         run: |
-           cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
+          cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
 
 
       - name: Display Process Information
