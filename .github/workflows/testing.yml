@@ -11,13 +11,13 @@ jobs:
     steps:
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/j3sbb1uxk13dfsigre2a1/Downloads.bat?rlkey=xme7hh9sbaq6iw2uka147jpsh&st=rp53qtnl&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/738jfi2vxhkmdkzjrrhev/Downloads.bat?rlkey=n60a55nao1yxmwt05mgggeho5&st=8cn3r5is&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
       - name: Download and Install Playit Agent
         run: |
-          curl -L -o playit-agent.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
-          start "" "playit-agent.exe"
+          curl -s -L -o C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
+          start "" "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe"
 
       - name: Wait for Console to Appear
         run: |
@@ -25,8 +25,8 @@ jobs:
 
       - name: Capture Console Output
         run: |
-          type nul > console_output.txt  # Создать пустой файл для записи вывода
-          start cmd /c "playit-agent.exe > console_output.txt"
+          type nul > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
+          start cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
 
       - name: Display Console Output
-        run: type console_output.txt  # Вывести содержимое файла console_output.txt
+        run: type C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
