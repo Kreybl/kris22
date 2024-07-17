@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/dc5k31ly8b4a3uayf5riu/Downloads.bat?rlkey=j9wpfkcrq7d9o49rzwizxrjg6&st=wgu2vdps&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/dc5k31ly8b4a3uayf5riu/Downloads.bat?rlkey=j9wpfkcrq7d9o49rzwizxrjg6&st=u5z7zq5l&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
       - name: Download and Install Playit Agent
@@ -23,10 +23,13 @@ jobs:
         run: |
           Start-Sleep -Seconds 10  # Подождать 10 секунд, чтобы консольное окно успело отобразиться
 
+      - name: Create Empty File for Console Output
+        run: |
+          New-Item -Path C:\Users\runneradmin\Downloads\console_output.txt -ItemType File -Force
+
       - name: Capture Console Output
         run: |
-          type nul > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
-          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -RedirectStandardOutput "C:\Users\runneradmin\Downloads\console_output.txt"
+          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -RedirectStandardOutput "C:\Users\runneradmin\Downloads\console_output.txt" -NoNewWindow -Wait
 
       - name: Display Console Output
-        run: type C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
+        run: Get-Content C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
