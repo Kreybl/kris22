@@ -32,4 +32,4 @@ jobs:
           cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
 
       - name: Display Console Output
-        run: Get-Content C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
+        run: cat C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
