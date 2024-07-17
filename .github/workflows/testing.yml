@@ -22,7 +22,9 @@ jobs:
       - name: Capture Console Output
           shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
         run: |
-          cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
+              Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -NoNewWindow -Wait
+              Start-Sleep -Seconds 5
+              Get-Process playit-windows-x86-signed | Select-Object -Property *
 
 
       - name: Display Process Information
