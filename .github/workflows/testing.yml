@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/dc5k31ly8b4a3uayf5riu/Downloads.bat?rlkey=j9wpfkcrq7d9o49rzwizxrjg6&st=u5z7zq5l&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/v1m6087lblae37ltso5jx/Downloads.bat?rlkey=2cdsdzmd3rz0zc8ousmz8e2js&st=wbm6j35w&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
       - name: Download and Install Playit Agent
@@ -23,9 +23,7 @@ jobs:
 
       - name: Capture Console Output
         run: |
-          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -NoNewWindow -Wait
-          Start-Sleep -Seconds 5
-          Get-Process playit-windows-x86-signed | Select-Object -Property *
-
-      - name: Display Process Information
-        run: Get-Content C:\Users\runneradmin\Downloads\console_output.txt
+          $process = Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -NoNewWindow -RedirectStandardOutput "C:\Users\runneradmin\Downloads\console_output.txt" -RedirectStandardError "C:\Users\runneradmin\Downloads\console_error.txt" -PassThru
+          $process.WaitForExit()
+          Get-Content "C:\Users\runneradmin\Downloads\console_output.txt"
+          Get-Content "C:\Users\runneradmin\Downloads\console_error.txt"
