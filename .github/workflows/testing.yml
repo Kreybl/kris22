@@ -17,19 +17,13 @@ jobs:
       - name: Download and Install Playit Agent
         run: |
           curl -s -L -o C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
-          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe"
-
-      - name: Wait for Console to Appear
-        run: |
-          Start-Sleep -Seconds 10  # Подождать 10 секунд, чтобы консольное окно успело отобразиться
 
       - name: Create Empty File for Console Output
-        run: |
-          New-Item -Path C:\Users\runneradmin\Downloads\console_output.txt -ItemType File -Force
+        run: type nul > C:\Users\runneradmin\Downloads\console_output.txt  # Создать пустой файл для записи вывода
 
       - name: Capture Console Output
         run: |
-          cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
+          start cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
 
       - name: Display Console Output
-        run: cat C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
+        run: Get-Content C:\Users\runneradmin\Downloads\console_output.txt  # Вывести содержимое файла console_output.txt
