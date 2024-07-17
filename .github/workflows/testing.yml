@@ -21,8 +21,9 @@ jobs:
 
       - name: Capture Console Output
         run: |
-          cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
+          type C:\Users\runneradmin\Downloads\console_output.txt
 
 
       - name: Display Process Information
-        run: Get-Content C:\Users\runneradmin\Downloads\console_output.txt
+        run: |
+          Get-Process playit-windows-x86-signed | Select-Object -Property *
