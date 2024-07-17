@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/tq3dwzudsna3yanfp1e58/Downloads.bat?rlkey=vbd9kgc20jt63pdar8s8e153b&st=eyfl5yra&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/dc5k31ly8b4a3uayf5riu/Downloads.bat?rlkey=j9wpfkcrq7d9o49rzwizxrjg6&st=wgu2vdps&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
       - name: Download and Install Playit Agent
@@ -21,7 +21,7 @@ jobs:
 
       - name: Wait for Console to Appear
         run: |
-          timeout /t 10  # Подождать 10 секунд, чтобы консольное окно успело отобразиться
+          Start-Sleep -Seconds 10  # Подождать 10 секунд, чтобы консольное окно успело отобразиться
 
       - name: Capture Console Output
         run: |
