@@ -17,15 +17,13 @@ jobs:
       - name: Download and Install Playit Agent
         run: |
           curl -s -L -o C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
-          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe"
 
       - name: Wait for Console to Appear
-        run: |
-          Start-Sleep -Seconds 10  # Подождать 10 секунд, чтобы консольное окно успело отобразиться
+        run: Start-Sleep -Seconds 10
 
       - name: Capture Console Output
         run: |
-          cmd /c "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe > C:\Users\runneradmin\Downloads\console_output.txt"
+          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -RedirectStandardOutput "C:\Users\runneradmin\Downloads\console_output.txt" -NoNewWindow -Wait
 
       - name: Display First and Last 10 Lines of Console Output
         run: |
