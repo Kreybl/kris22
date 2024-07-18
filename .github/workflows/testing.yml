@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/zha40mnr6qpkt9xe7txnu/Downloads.bat?rlkey=hj81f6bfpxnscrkse9v7ccyqa&st=dbc8shfq&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/gq86xlw30u2xkjpb9pfnd/Downloads.bat?rlkey=mvpln16ktwnxj8gmbthn3el8l&st=uxflgr4q&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
           
       - name: Download and Install Playit Agent
