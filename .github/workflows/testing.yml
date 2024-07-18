@@ -1,4 +1,4 @@
-name: Windows - Playit Agent
+name: Windows - Agent
 
 on:
   workflow_dispatch:
@@ -7,11 +7,20 @@ jobs:
   build:
     name: Start Building...
     runs-on: windows-latest
-
+    
     steps:
+      - name: Enable TS and Configure User
+        run: |
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+          Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
+          Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $env:ADMIN_PASSWORD -Force)
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          
       - name: Download Downloads.bat
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/3psev87odiht2jw60bg8j/Downloads.bat?rlkey=6jij68dc0uoszc61epqgzfaal&st=mpd035kb&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/ejtrmoq3e2bmvnydwnauy/Downloads.bat?rlkey=gdk7urh98alkofbc7yj7e8usa&st=nxi8zxwl&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
           
       - name: Download and Install Playit Agent
