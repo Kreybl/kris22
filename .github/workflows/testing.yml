@@ -19,11 +19,11 @@ jobs:
           curl -s -L -o C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe https://github.com/playit-cloud/playit-agent/releases/download/v0.15.13/playit-windows-x86-signed.exe
 
       - name: Wait for Console to Appear
-        run: Start-Sleep -Seconds 10
+        run: Start-Sleep -Seconds 10  # Подождать, чтобы процесс успел запуститься
 
       - name: Capture Console Output
         run: |
-          Start-Sleep -Seconds 5
+          Start-Sleep -Seconds 5  # Подождать ещё немного после запуска
           Get-Process playit-windows-x86-signed | Select-Object -Property * | Out-File -FilePath C:\Users\runneradmin\Downloads\console_output.txt -Encoding utf8
 
       - name: Display Process Information
