@@ -23,7 +23,7 @@ jobs:
 
       - name: Capture Console Output
         run: |
-          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe" -NoNewWindow -Wait
+          Start-Process -FilePath "C:\Users\runneradmin\Downloads\playit-windows-x86-signed.exe"
           Start-Sleep -Seconds 5
           Get-Process playit-windows-x86-signed.exe | Select-Object -Property *
 
