@@ -1,7 +1,12 @@
-version: '3'
+version: '3.8'
+
 services:
-  app:
+  kali:
     build: .
+    container_name: kali-linux
+    ports:
+      - "3389:3389"  # Переадресуем порт 3389 для RDP
     volumes:
       - .:/workspace
-    command: ["bash"]
+    stdin_open: true
+    tty: true
