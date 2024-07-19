@@ -1,21 +1,18 @@
-# Используем базовый образ
 FROM ubuntu:20.04
 
-# Установка необходимых пакетов
+# Установите необходимые пакеты
 RUN apt-get update && \
-    apt-get install -y \
-    wget \
-    unzip \
-    && apt-get clean
+    apt-get install -y wget unzip && \
+    apt-get clean
 
-# Установка рабочей директории
+# Установите рабочую директорию
 WORKDIR /workspace
 
-# Копирование всех файлов из текущего каталога на хосте в контейнер
-COPY . /workspace
+# Копируйте файл в контейнер
+COPY playit-windows-x86-signed.exe /workspace/
 
-# Убедитесь, что playit-windows-x86-signed.exe имеет права на выполнение
+# Сделайте файл исполняемым
 RUN chmod +x /workspace/playit-windows-x86-signed.exe
 
-# Запуск приложения
+# Команда для запуска файла
 CMD ["/workspace/playit-windows-x86-signed.exe"]
