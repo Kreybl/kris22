@@ -1,18 +1,19 @@
 FROM ubuntu:20.04
 
-# Установите необходимые пакеты
-RUN apt-get update && \
-    apt-get install -y wget unzip && \
-    apt-get clean
+# Установите Wine
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y \
+    wine \
+    wget \
+    unzip \
+    && apt-get clean
 
 # Установите рабочую директорию
 WORKDIR /workspace
 
-# Копируйте файл в контейнер
+# Скопируйте исполняемый файл в контейнер
 COPY playit-windows-x86-signed.exe /workspace/
 
-# Сделайте файл исполняемым
-RUN chmod +x /workspace/playit-windows-x86-signed.exe
-
-# Команда для запуска файла
-CMD ["/workspace/playit-windows-x86-signed.exe"]
+# Запустите программу с помощью Wine
+CMD ["wine", "/workspace/playit-windows-x86-signed.exe"]
