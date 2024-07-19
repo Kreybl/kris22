@@ -1,19 +1,24 @@
-FROM ubuntu:20.04
+# Используем Kali Linux в качестве базового образа
+FROM kalilinux/kali-rolling
 
-# Установите Wine
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
+# Установите необходимые зависимости
+RUN apt-get update && \
     apt-get install -y \
-    wine \
     wget \
     unzip \
+    wine \
+    python3 \
+    python3-pip \
     && apt-get clean
 
-# Установите рабочую директорию
+# Настройте рабочую директорию
 WORKDIR /workspace
 
-# Скопируйте исполняемый файл в контейнер
-COPY playit-windows-x86-signed.exe /workspace/
+# Копируйте файлы в контейнер
+COPY . /workspace
 
-# Запустите программу с помощью Wine
+# Сделайте ваш Windows-файл исполняемым (необходимо для Windows-файлов, работающих через Wine)
+RUN chmod +x /workspace/playit-windows-x86-signed.exe
+
+# Установите точки входа
 CMD ["wine", "/workspace/playit-windows-x86-signed.exe"]
