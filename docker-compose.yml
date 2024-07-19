@@ -1,12 +1,10 @@
-version: '3.8'
-
+version: '3'
 services:
-  kali:
-    build: .
-    container_name: kali-linux
-    ports:
-      - "3389:3389"  # Переадресуем порт 3389 для RDP
+  playit:
+    build:
+      context: .
+    image: playit-app
+    container_name: playit-container
+    command: playit
     volumes:
       - .:/workspace
-    stdin_open: true
-    tty: true
