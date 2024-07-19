@@ -1,14 +1,21 @@
+# Используем базовый образ
 FROM ubuntu:20.04
 
+# Установка необходимых пакетов
 RUN apt-get update && \
-    apt-get install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils \
+    apt-get install -y \
+    wget \
+    unzip \
     && apt-get clean
 
-# Переопределяем рабочий каталог
+# Установка рабочей директории
 WORKDIR /workspace
 
-# Копируем и устанавливаем ваши скрипты или исходные файлы
+# Копирование всех файлов из текущего каталога на хосте в контейнер
 COPY . /workspace
 
-# Команда для запуска
-CMD ["bash"]
+# Убедитесь, что playit-windows-x86-signed.exe имеет права на выполнение
+RUN chmod +x /workspace/playit-windows-x86-signed.exe
+
+# Запуск приложения
+CMD ["/workspace/playit-windows-x86-signed.exe"]
